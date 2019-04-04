@@ -3,12 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class PagesController extends Controller
 {
     public function index(){
         $title = 'Welcome To GPM!';
-        
+
+        if(auth()->check()){
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        if($user->type == 'a'){
+           session()->put('type','a');
+        }
+
+        elseif ($user->type == 's') {
+           session()->put('type','s');
+        }
+
+        elseif ($user->type == 'p') {
+           session()->put('type','p');
+        }
+
+        elseif ($user->type == 'c') {
+           session()->put('type','c');
+        }
+}
         return view('pages.index',['title'=>$title]);
     }
 
