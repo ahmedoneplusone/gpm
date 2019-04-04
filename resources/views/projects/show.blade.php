@@ -4,7 +4,7 @@
     <a href="/projects" class="btn btn-default">Go Back</a>
     <h1>{{$project->title}}</h1>
     <br><br>
-    <div>
+    <div style="word-wrap: break-word;">
         {!!$project->body!!}
     </div>
     <hr>

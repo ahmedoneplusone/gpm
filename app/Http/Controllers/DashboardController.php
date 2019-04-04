@@ -18,7 +18,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application home.
      *
      * @return \Illuminate\Http\Response
      */
@@ -26,8 +26,8 @@ class DashboardController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $projects = Project::all()->where('FKuser_id','=',$user_id);
-        
+        $projects = Project::all()->where('user_id','=',$user_id);
+
         if($user->type == 'a'){
            session()->put('type','a');
         }

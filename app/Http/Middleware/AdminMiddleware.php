@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
 
 use Closure;
 
@@ -34,8 +35,8 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->getUser()->type !== 'a') {
-            abort(403, 'Unauthorized action.');
+        if ($this->auth->getUser()->type != 'a') {
+            return redirect('/');
         }
 
         return $next($request);

@@ -68,7 +68,7 @@ class ProjectsController extends Controller
         $project->user_id = auth()->user()->id;
         $project->save();
 
-        return redirect('/projects')->with('success', 'Project Created');
+        return redirect('/dashboard')->with('success', 'Project Created');
     }
 
     /**
@@ -123,7 +123,7 @@ class ProjectsController extends Controller
 
         $project->save();
 
-        return redirect('/projects')->with('success', 'Project Updated');
+        return redirect('/dashboard')->with('success', 'Project Updated');
     }
 
     /**
@@ -142,6 +142,6 @@ class ProjectsController extends Controller
         }
         
         $project->delete();
-        return redirect('/projects')->with('success', 'Project Removed');
+        return redirect('/dashboard')->with('success', 'Project Removed');
     }
 }
