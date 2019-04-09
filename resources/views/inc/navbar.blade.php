@@ -1,7 +1,6 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar">
     <div class="container">
         <div class="navbar-header">
-
             <!-- Collapsed Hamburger -->
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                 <span class="sr-only">Toggle Navigation</span>
@@ -11,9 +10,9 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
+           <!--  <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
-            </a>
+            </a> -->
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -23,15 +22,15 @@
             </ul>
 
             <ul class="nav navbar-nav">
-              <li><a href="/">Home</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/projects">Projects</a></li>
+              <li><a href="/"> <i class="fas fa-home"></i> Home</a></li>
+              <li><a href="/about"> <i class="fab fa-weixin"></i> About</a></li>
+              <li><a href="/projects"> <i class="fas fa-database"></i> Projects</a></li>
 
 
              @if(Auth::check())
                 @if(session()->get('type') == 'a')
 
-                     <li><a href="admin/all_users">Users</a></li>
+                     <li><a href="admin/all_users"> <i class="far fa-user"></i> Users</a></li>
 
                 @endif
               @endif
