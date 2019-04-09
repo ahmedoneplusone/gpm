@@ -19,6 +19,25 @@ Route::get('/dashboard', 'DashboardController@index');
 
 Route::group(['middleware' => ['auth', 'admin']], function() {
 
+		Route::get('admin/home', 'AdminController@index');
 		Route::get('admin/all_users', 'AdminController@all_users');
+
+});
+
+Route::group(['middleware' => ['auth', 'student']], function() {
+	
+		Route::get('student/home', 'StudentController@index');
+
+		Route::get('student/register_gp_SLeader', 'StudentController@register_gp_SLeader');
+
+		Route::post('student/register_gp_SLeader_post', 'StudentController@register_gp_SLeader_post');
+
+		Route::get('student/register_gp_Members/{studentL}/{team}', 'StudentController@register_gp_Members');
+
+		Route::post('student/register_gp_Members_post', 'StudentController@register_gp_Members_post');
+
+		Route::get('student/register_gp_Project/{all_students}/{all_users}/{team}', 'StudentController@register_gp_Project');
+
+		Route::post('student/register_gp_Project_post', 'StudentController@register_gp_Project_post');
 
 });
