@@ -1,4 +1,7 @@
+
 <nav class="navbar">
+@inject('project', 'App\Project')
+<nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
             <!-- Collapsed Hamburger -->
@@ -32,6 +35,16 @@
 
                      <li><a href="admin/all_users"> <i class="far fa-user"></i> Users</a></li>
 
+                @endif
+              @endif
+
+            @if(Auth::check())
+                @if(session()->get('type') == 's')
+                    @if($project->where('user_id',auth()->user()->id)->count() == 0)
+
+                     <li><a href="{{ action('StudentController@register_gp_SLeader') }}">Register GP</a></li>
+
+                    @endif
                 @endif
               @endif
 

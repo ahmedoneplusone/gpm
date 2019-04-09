@@ -13,12 +13,15 @@ class PagesController extends Controller
         if(auth()->check()){
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
+
         if($user->type == 'a'){
            session()->put('type','a');
+           return redirect()->action('AdminController@index');
         }
 
         elseif ($user->type == 's') {
            session()->put('type','s');
+           return redirect()->action('StudentController@index');
         }
 
         elseif ($user->type == 'p') {
