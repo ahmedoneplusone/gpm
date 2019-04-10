@@ -1,7 +1,7 @@
 
 <nav class="navbar">
 @inject('project', 'App\Project')
-<nav class="navbar navbar-inverse">
+<nav class="navbar" id="MainNav">
     <div class="container">
         <div class="navbar-header">
             <!-- Collapsed Hamburger -->
@@ -25,9 +25,9 @@
             </ul>
 
             <ul class="nav navbar-nav">
-              <li><a href="/"> <i class="fas fa-home"></i> Home</a></li>
-              <li><a href="/about"> <i class="fab fa-weixin"></i> About</a></li>
-              <li><a href="/projects"> <i class="fas fa-database"></i> Projects</a></li>
+              <li><a href="/"> <i class="fas fa-home"></i> <b>HOME</b></a></li>
+              <li><a href="/about"> <i class="fab fa-weixin"></i> <b>ABOUT</b></a></li>
+              <li><a href="/projects"> <i class="fas fa-database"></i><b> PROJECTS</b></a></li>
 
 
              @if(Auth::check())

@@ -10,108 +10,74 @@
     		</form>
     	</div>
     </div>
-    <div class="Content">
-    	<div class="_content_padd_5">
-    	<div class="_Left_side">
-    		<div class="_con_card">
-    			<h4> <i class="far fa-newspaper"></i> RECENT FACULTIES</h4>
-	    		<div class="hr"></div>
-	    		<div class="_fac_details">
-	    			<div class="_details_right">
-	    				<img src="{{url('/')}}/img/fcih.jpg" class="_details_right_img">
-	    			</div>
-	    			<div class="_details_left">
-	    				<p><b>Faculty of Computer And Information</b></p>
-	    				<p>25 Project, 110 Student, 25 Profs.</p>
-	    			</div>
-
-	    		</div>
-	    		<br>
-	    		<div class="_fac_details">
-	    			<div class="_details_right">
-	    				<img src="{{url('/')}}/img/fcih.jpg" class="_details_right_img">
-	    			</div>
-	    			<div class="_details_left">
-	    				<p><b>Faculty of Computer And Information</b></p>
-	    				<p>25 Project, 110 Student, 25 Profs.</p>
-	    			</div>
-
-	    		</div>
-	    		<br>
-	    		<div class="_fac_details">
-	    			<div class="_details_right">
-	    				<img src="{{url('/')}}/img/fcih.jpg" class="_details_right_img">
-	    			</div>
-	    			<div class="_details_left">
-	    				<p><b>Faculty of Computer And Information</b></p>
-	    				<p>25 Project, 110 Student, 25 Profs.</p>
-	    			</div>
-
-	    		</div>
-    		</div>
-    		<br>
-    		<div class="_con_card">
-    			<h4> <i class="far fa-newspaper"></i> RECENT PROJECTS</h4>
-	    		<div class="hr"></div>
-	    		<div class="_fac_details">
-	    			<div class="_details_right">
-	    				<img src="{{url('/')}}/img/fcih.jpg" class="_details_right_img">
-	    			</div>
-	    			<div class="_details_left">
-	    				<p><b>Graduation Project Managment</b></p>
-	    				<p>1 mins ago.</p>
-	    			</div>
-
-	    		</div>
-    		</div>
-    		<br>
-    		<div class="_con_card">
-    			<h4><i class="far fa-newspaper"></i> RECENT COMPANIES</h4>
-	    		<div class="hr"></div>
-	    		<div class="_fac_details">
-	    			<div class="_details_right">
-	    				<img src="{{url('/')}}/img/fcih.jpg" class="_details_right_img">
-	    			</div>
-	    			<div class="_details_left">
-	    				<p><b>MICROSOFT EGYPT COMPANY</b></p>
-	    				<p>0 Projects.</p>
-	    			</div>
-
-	    		</div>
-    		</div>
-    	</div>
-    	<div class="_Center_side">
-    		<div class="_con_card">
-    			<div class="_card_social_card">
-    				<div class="social_card_img">
-    					<img  src="{{url('/')}}/img/fcih.jpg"/>
+    <br><br>
+    <div class="container">
+    	<div class="row">
+    		<div class="col-md-3 col-sm-12 col-xs-12">
+    			<div class="_con_card" style="height: 250px;">
+    				<h1 class="h1_optimzed"> <i class="fas fa-bell"></i> <b>RECENET FACULITIES</b></h1>
+    				<div class="Content-Li">
+    					@if(count($companies) >= 1)
+    							@foreach($companies as $company)
+    							<ul>
+		    						<li>
+		    							<span><b>{{$company->user->name}}</b></span> 
+		    							<p style="line-height: .5;"> <small><strong>2 min ago</strong></small></p>
+		    						</li>
+	    						</ul>
+	    						@endforeach
+    						@else
+    							<div class="text-center">
+    								<p style="color:#e74c3c"><small><strong>NO FACULITIES YET</strong></small></p>
+    							</div>
+    						@endif
     				</div>
-    				<div class="social_card_Content">
-    					<p><b>AHMED WAEL</b></p>
-    					<small><i class="far fa-clock"></i> 14Feb,2019 10:12:44 PM</small>
-    					<small><i class="fas fa-map-marker"></i> FCIH STUDENT</small>
+    			</div>
+    			<br>
+    			<div class="_con_card" style="height: 250px;">
+    				<h1 class="h1_optimzed"> <i class="fas fa-bell"></i> <b>RECENET COMPANIES</b></h1>
+    				<div class="Content-Li">
+    					
+    						@if(count($companies) >= 1)
+    							@foreach($companies as $company)
+    							<ul>
+		    						<li>
+		    							<span><b>{{$company->user->name}}</b></span> 
+		    							<p style="line-height: .5;"> <small><strong>2 min ago</strong></small></p>
+		    						</li>
+	    						</ul>
+	    						@endforeach
+    						@else
+    							<div class="text-center">
+    								<p style="color:#e74c3c"><small><strong>NO COMPAINES YET</strong></small></p>
+    							</div>
+    						@endif
     					
     				</div>
-    				
     			</div>
     		</div>
-    	</div>
-    	<div class="_Right_side">
-    		<div class="_con_card">
-    			<h4> <i class="far fa-newspaper"></i> RELATIONED WITH YOU</h4>
-	    		<div class="hr"></div>
-	    		<div class="_fac_details">
-	    			<div class="_details_right">
-	    				<img src="{{url('/')}}/img/fcih.jpg" class="_details_right_img">
-	    			</div>
-	    			<div class="_details_left">
-	    				<p><b>Faculty of Computer And Information</b></p>
-	    				<p>25 Project, 110 Student, 25 Profs.</p>
-	    			</div>
-
-	    		</div>
-	    		<br>
-	    	</div>
+    		<div class="col-md-9 col-sm-12 col-xs-12">
+    			<div class="_con_card">
+    				<h1 class="h1_optimzed"><i class="fas fa-database"></i> <strong>RECENET PROJECTS</strong></h1>
+    				@if(count($projects) >= 1)
+    					<ul>
+	    					@foreach($projects as $project)
+	    						
+	    							<li>
+	    								<div class="Projects">
+		    								
+		    							</div>
+	    							</li>
+	    						
+	    					@endforeach
+    					</ul>
+    				@else
+    					<div class="text-center">
+    						<p style="color:#e74c3c;"><small><strong>NO PROJECTS YET</strong></small></p>
+    					</div>
+    				@endif
+    			</div>
+    		</div>
     	</div>
     </div>
     

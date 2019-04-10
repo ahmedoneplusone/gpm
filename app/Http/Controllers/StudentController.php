@@ -7,6 +7,7 @@ use App\Project;
 use App\Student;
 use App\Team;
 use App\User;
+use App\Company;
 
 use Illuminate\Support\Facades\Crypt;
 
@@ -20,7 +21,9 @@ class StudentController extends Controller
 
     public function index (){
 
-        return view('pages.index');
+        $comps = Company::get();
+        $projs = Project::get();
+        return view('pages.index')->with(['companies'=>$comps,'projects'=>$projs]);
     }
 
     public function register_gp_SLeader (){

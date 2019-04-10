@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Company;
+use App\Project;
 
 class PagesController extends Controller
 {
@@ -11,28 +13,30 @@ class PagesController extends Controller
         $title = 'Welcome To GPM!';
 
         if(auth()->check()){
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
+          $user_id = auth()->user()->id;
+          $user = User::find($user_id);
 
-        if($user->type == 'a'){
-           session()->put('type','a');
-           return redirect()->action('AdminController@index');
-        }
+          if($user->type == 'a'){
+             session()->put('type','a');
+             return redirect()->action('AdminController@index');
+          }
 
-        elseif ($user->type == 's') {
-           session()->put('type','s');
-           return redirect()->action('StudentController@index');
-        }
+          elseif ($user->type == 's') {
+             session()->put('type','s');
+             return redirect()->action('StudentController@index');
+          }
 
-        elseif ($user->type == 'p') {
-           session()->put('type','p');
-        }
+          elseif ($user->type == 'p') {
+             session()->put('type','p');
+          }
 
-        elseif ($user->type == 'c') {
-           session()->put('type','c');
+          elseif ($user->type == 'c') {
+             session()->put('type','c');
+          }
         }
-}
-        return view('pages.index',['title'=>$title]);
+        $comps = Company::get();
+        $projs = Project::get();
+        return view('pages.index')->with(['companies'=>$comps,'projects'=>$projs]);
     }
 
     public function about(){
