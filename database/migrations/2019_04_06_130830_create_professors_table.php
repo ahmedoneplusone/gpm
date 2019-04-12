@@ -16,14 +16,24 @@ class CreateProfessorsTable extends Migration
         Schema::create('professors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->string('faculty');
-            $table->string('dept');
+            $table->bigInteger('faculty_id')->unsigned()->nullable();
+            $table->bigInteger('dept_id')->unsigned()->nullable();
             $table->timestamps();
 
 
             $table->foreign('user_id')
             ->references('id')
             ->on('users')
+            ->onDelete('cascade');
+
+            $table->foreign('faculty_id')
+            ->references('id')
+            ->on('faculties')
+            ->onDelete('cascade');
+
+            $table->foreign('dept_id')
+            ->references('id')
+            ->on('departments')
             ->onDelete('cascade');
         });
     }

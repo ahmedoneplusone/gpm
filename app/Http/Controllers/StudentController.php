@@ -7,7 +7,6 @@ use App\Project;
 use App\Student;
 use App\Team;
 use App\User;
-use App\Company;
 
 use Illuminate\Support\Facades\Crypt;
 
@@ -19,49 +18,43 @@ class StudentController extends Controller
         $this->middleware('auth');        
     }
 
-    public function index (){
-
-        $comps = Company::get();
-        $projs = Project::get();
-        return view('pages.index')->with(['companies'=>$comps,'projects'=>$projs]);
-    }
 
     public function register_gp_SLeader (){
-    	if(Project::where('user_id',auth()->user()->id)->count() > 0){
-    		return back();
+
+        $projects[] = new Project;
+        $projects = Project::all()->where('user_id',auth()->user()->id);
+        
+    	if($projects->count() > 0){
+            foreach ($projects as $p) {
+                if($p->is_gp == 1){
+                    return redirect('/');
+                }
+            }
     	}
-    	return view('students.register_gp_SLeader');
+
+        $studentL = Student::get()->where('user_id',auth()->user()->id)->first();
+
+    	return view('students.register_gp_SLeader',['studentL'=>$studentL]);
     }
 
     public function register_gp_SLeader_post (Request $request){
     	
-        $this->validate($request, [
-            'student_id' => 'required',
-            'faculty' => 'required',
-            'dept' => 'required',
-        ]);
+       
 
         $team = new Team;
 		$team->leader_id = auth()->user()->id;
+        $team->save();
 
-        $studentL = new Student;
-        $studentL->user_id = auth()->user()->id;
-        $studentL->student_id = $request->input('student_id');
-        $studentL->faculty = $request->input('faculty');
-        $studentL->dept = $request->input('dept');
+        $studentL = Student::get()->where('user_id',auth()->user()->id)->first();
+        $studentL->team_id = Team::orderBy('created_at','DESC')->first()->id;
+        $studentL->save();
 
-        $enc_studentL = Crypt::encrypt($studentL);
-        $enc_team = Crypt::encrypt($team);
-
-		return redirect('student/register_gp_Members/'.$enc_studentL.'/'.$enc_team);
+		return redirect('student/register_gp_Members');
     }
 
-    public function register_gp_Members ($enc_studentL,$enc_team){
+    public function register_gp_Members (){
 
-    	$studentL = Crypt::decrypt($enc_studentL);
-    	$team = Crypt::decrypt($enc_team);
-
-    	return view('students.register_gp_Members',array('studentL' => $studentL,'team' => $team));
+    	return view('students.register_gp_Members');
     }
 
     public function register_gp_Members_post (Request $request){
@@ -79,6 +72,7 @@ class StudentController extends Controller
             'name_3' => 'required',
             'email_3' => 'required',
             'student_id_3' => 'required',
+
         ],[],[
 
         	"name_0" => "First Member's Name",
@@ -87,88 +81,87 @@ class StudentController extends Controller
         	"name_1" => "Second Member's Name",
         	"email_1" => "Second Member's E-mail",
         	"student_id_1" => "Second Member's ID",
-        	"name_2" => "Third Member's Name",
-        	"email_2" => "Third Member's E-mail",
-        	"student_id_2" => "Third Member's ID",
-        	"name_3" => "Fourth Member's Name",
-        	"email_3" => "Fourth Member's E-mail",
-        	"student_id_3" => "Fourth Member's ID",
+            "name_2" => "Third Member's Name",
+            "email_2" => "Third Member's E-mail",
+            "student_id_2" => "Third Member's ID",
+            "name_3" => "Fourth Member's Name",
+            "email_3" => "Fourth Member's E-mail",
+            "student_id_3" => "Fourth Member's ID",
+
         ]);
+
+
+        $studentL = Student::get()->where('user_id',auth()->user()->id)->first();
 
         $user_0 = new User;
         $user_0->name = $request->input('name_0');
         $user_0->email = $request->input('email_0'); 
-		$user_0->password = "".rand(10000000,9999999999);
+		$user_0->password = bcrypt("".rand(10000000,9999999999));
+        $user_0->type = 's';
+        $user_0->save();
+
+        $student_0 = new Student;
+        $student_0->user_id = $user_0->id; 
+        $student_0->student_id = $request->input('student_id_0');
+        $student_0->faculty_id = $studentL->faculty_id;
+        $student_0->dept_id = $studentL->dept_id;
+        $student_0->team_id = $studentL->team_id;
+        $student_0->save();
+
 
 		$user_1 = new User;
         $user_1->name = $request->input('name_1');
         $user_1->email = $request->input('email_1'); 
-		$user_1->password = "".rand(10000000,9999999999);
+		$user_1->password = bcrypt("".rand(10000000,9999999999));
+        $user_1->type = 's';
+        $user_1->save(); 
+
+        $student_1 = new Student;
+        $student_1->user_id = $user_1->id; 
+        $student_1->student_id = $request->input('student_id_1');
+        $student_1->faculty_id = $studentL->faculty_id;
+        $student_1->dept_id = $studentL->dept_id;
+        $student_1->team_id = $studentL->team_id;
+        $student_1->save();
 
 		$user_2 = new User;
         $user_2->name = $request->input('name_2');
         $user_2->email = $request->input('email_2'); 
-		$user_2->password = "".rand(10000000,9999999999);
+		$user_2->password = bcrypt("".rand(10000000,9999999999));
+        $user_2->type = 's';
+        $user_2->save(); 
+
+        $student_2 = new Student;
+        $student_2->user_id = $user_2->id; 
+        $student_2->student_id = $request->input('student_id_2');
+        $student_2->faculty_id = $studentL->faculty_id;
+        $student_2->dept_id = $studentL->dept_id;
+        $student_2->team_id = $studentL->team_id;
+        $student_2->save();
+
 
 		$user_3 = new User;
         $user_3->name = $request->input('name_3');
         $user_3->email = $request->input('email_3'); 
-		$user_3->password = "".rand(10000000,9999999999);
-
-		$allUsers[] = new User;
-		$allUsers[0] = $user_0;
-		$allUsers[1] = $user_1;
-		$allUsers[2] = $user_2;
-		$allUsers[3] = $user_3;
-
-
-		$studentL = new Student;
-		$studentL = json_decode($request->studentL,true);
-
-    	$student_0 = new Student;
-        $student_0->student_id = $request->input('student_id_0');
-        $student_0->faculty = $studentL['faculty'];
-        $student_0->dept = $studentL['dept'];
-
-        $student_1 = new Student;
-        $student_1->student_id = $request->input('student_id_1');
-        $student_1->faculty = $studentL['faculty'];
-        $student_1->dept = $studentL['dept'];
-
-        $student_2 = new Student;
-        $student_2->student_id = $request->input('student_id_2');
-        $student_2->faculty = $studentL['faculty'];
-        $student_2->dept = $studentL['dept'];
+		$user_3->password = bcrypt("".rand(10000000,9999999999));
+        $user_3->type = 's';
+        $user_3->save();
 
         $student_3 = new Student;
+        $student_3->user_id = $user_3->id; 
         $student_3->student_id = $request->input('student_id_3');
-        $student_3->faculty = $studentL['faculty'];
-        $student_3->dept = $studentL['dept'];
-
-    	$allStudents[] = new Student;
-    	$allStudents[0] = $studentL;
-    	$allStudents[1] = $student_0;
-    	$allStudents[2] = $student_1;
-    	$allStudents[3] = $student_2;
-    	$allStudents[4] = $student_3;
-
-    	$team = new Team;
-		$team = json_decode($request->team,true);
-
-		$enc_all_students = Crypt::encrypt($allStudents);
-		$enc_all_users = Crypt::encrypt($allUsers);
-        $enc_team = Crypt::encrypt($team);
+        $student_3->faculty_id = $studentL->faculty_id;
+        $student_3->dept_id = $studentL->dept_id;
+        $student_3->team_id = $studentL->team_id;
+        $student_3->save();
     	
-		return redirect('student/register_gp_Project/'.$enc_all_students.'/'.$enc_all_users.'/'.$enc_team);
+		return redirect('student/register_gp_Project');
     }
 
-    public function register_gp_Project($enc_all_students,$enc_all_users,$enc_team){
+    public function register_gp_Project(){
 
-    	$all_students = Crypt::decrypt($enc_all_students);
-		$all_users = Crypt::decrypt($enc_all_users);
-        $team = Crypt::decrypt($enc_team);
 
-    	return view('students.register_gp_Project',array('all_students' => $all_students,'all_users' => $all_users,'team'=>$team));
+    	return view('students.register_gp_Project');
     }
 
     public function register_gp_Project_post(Request $request){
@@ -178,19 +171,23 @@ class StudentController extends Controller
             'body' => 'required',
         ]);
 
-    	$all_students = json_decode($request->all_students,true);
-    	$all_users = json_decode($request->all_users,true);
-    	$team = json_decode($request->team,true);
 
     	$project = new Project;
 
     	$project->title = $request->input('title');
     	$project->body = $request->input('body');
     	$project->user_id = auth()->user()->id;
+        $project->is_gp = 1;
+        $project->save();
 
-    	
+        $studentL = Student::get()->where('user_id',auth()->user()->id)->first();
 
-    	return $all_students[0]['faculty'] ;
+        $team = Team::get()->where('id', $studentL->team_id)->first();
+        $team->prof_id = $request->input('prof');
+        $team->project_id = Project::orderBy('created_at','DESC')->first()->id;
+        $team->save();
+
+    	return redirect('/dashboard');
     }
 
 }

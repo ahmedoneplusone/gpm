@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
     <a href="/projects" class="btn btn-default">Go Back</a>
+    <br><br>
+    <div class="well">
     <h1>{{$project->title}}</h1>
     <br><br>
     <div style="word-wrap: break-word;">
@@ -20,4 +25,7 @@
             {!!Form::close()!!}
         @endif
     @endif
+    </div>
+    </div>
+</div>
 @endsection

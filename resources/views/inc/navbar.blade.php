@@ -1,6 +1,6 @@
 
 <nav class="navbar">
-@inject('project', 'App\Project')
+
 <nav class="navbar" id="MainNav">
     <div class="container">
         <div class="navbar-header">
@@ -27,7 +27,7 @@
             <ul class="nav navbar-nav">
               <li><a href="/"> <i class="fas fa-home"></i> <b>HOME</b></a></li>
               <li><a href="/about"> <i class="fab fa-weixin"></i> <b>ABOUT</b></a></li>
-              <li><a href="/projects"> <i class="fas fa-database"></i><b> PROJECTS</b></a></li>
+              <li><a href="/projects"> <i class="fas fa-database"></i><b> PROJECTS IDEAS</b></a></li>
 
 
              @if(Auth::check())
@@ -40,13 +40,30 @@
 
             @if(Auth::check())
                 @if(session()->get('type') == 's')
-                    @if($project->where('user_id',auth()->user()->id)->count() == 0)
 
-                     <li><a href="{{ action('StudentController@register_gp_SLeader') }}">Register GP</a></li>
+                    <?php 
+                        $projects[] = new App\Project ;
+                        $projects = App\Project::all()->where('user_id',auth()->user()->id) ;
+                    ?>
+        
+                    @if($projects->count() > 0)
+                        <?php  $gp_exist = 0 ?>
+                      @foreach ($projects as $p) 
+                        @if($p->is_gp == 1)
+                            <?php $gp_exist = 1 ?>
+                        @endif
+                      @endforeach
+                      @if($gp_exist == 0)
+                        <li><a href="{{ action('StudentController@register_gp_SLeader') }}">Register GP</a></li>
+                      @endif
+                    @else
+                        <li><a href="{{ action('StudentController@register_gp_SLeader') }}">Register GP</a></li>
+                    @endif  
 
-                    @endif
+
+
                 @endif
-              @endif
+            @endif
 
             </ul>
 

@@ -32,11 +32,11 @@ Route::group(['middleware' => ['auth', 'student']], function() {
 
 		Route::post('student/register_gp_SLeader_post', 'StudentController@register_gp_SLeader_post');
 
-		Route::get('student/register_gp_Members/{studentL}/{team}', 'StudentController@register_gp_Members');
+		Route::get('student/register_gp_Members', 'StudentController@register_gp_Members');
 
 		Route::post('student/register_gp_Members_post', 'StudentController@register_gp_Members_post');
 
-		Route::get('student/register_gp_Project/{all_students}/{all_users}/{team}', 'StudentController@register_gp_Project');
+		Route::get('student/register_gp_Project', 'StudentController@register_gp_Project');
 
 		Route::post('student/register_gp_Project_post', 'StudentController@register_gp_Project_post');
 

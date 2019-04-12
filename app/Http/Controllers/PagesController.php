@@ -18,12 +18,10 @@ class PagesController extends Controller
 
           if($user->type == 'a'){
              session()->put('type','a');
-             return redirect()->action('AdminController@index');
           }
 
           elseif ($user->type == 's') {
              session()->put('type','s');
-             return redirect()->action('StudentController@index');
           }
 
           elseif ($user->type == 'p') {
@@ -34,6 +32,7 @@ class PagesController extends Controller
              session()->put('type','c');
           }
         }
+
         $comps = Company::get();
         $projs = Project::get();
         return view('pages.index')->with(['companies'=>$comps,'projects'=>$projs]);

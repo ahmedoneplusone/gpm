@@ -1,7 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Projects</h1>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+    <h1>Projects Ideas</h1>
+    <a href="/projects/create" class="btn btn-primary">Create Project Idea</a>
+
+
+
+<br/><br/>
+
+
+
     @if(count($projects) > 0)
         @foreach($projects as $project)
             <div class="well">
@@ -17,4 +29,7 @@
     @else
         <p>No projects found</p>
     @endif
+
+    </div>
+</div>
 @endsection

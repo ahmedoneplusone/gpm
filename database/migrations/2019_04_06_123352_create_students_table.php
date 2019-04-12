@@ -17,9 +17,9 @@ class CreateStudentsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('student_id');
-            $table->string('faculty');
-            $table->string('dept');
-            $table->bigInteger('team_id')->unsigned();
+            $table->bigInteger('faculty_id')->unsigned()->nullable();
+            $table->bigInteger('dept_id')->unsigned()->nullable();
+            $table->bigInteger('team_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
@@ -30,6 +30,16 @@ class CreateStudentsTable extends Migration
             $table->foreign('team_id')
             ->references('id')
             ->on('teams')
+            ->onDelete('cascade');
+
+            $table->foreign('faculty_id')
+            ->references('id')
+            ->on('faculties')
+            ->onDelete('cascade');
+
+            $table->foreign('dept_id')
+            ->references('id')
+            ->on('departments')
             ->onDelete('cascade');
         });
     }

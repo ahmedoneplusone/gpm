@@ -11,9 +11,6 @@ class AdminController extends Controller
         $this->middleware('auth');        
     }
 
-    public function index (){
-        return view('pages.index');
-    }
 
     public function all_users (){
     	return "all us";

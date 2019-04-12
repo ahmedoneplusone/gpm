@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->mediumText('body');
             $table->bigInteger('user_id')->unsigned();
             $table->timestamps();
+            $table->boolean('is_gp');
 
             $table->foreign('user_id')
             ->references('id')

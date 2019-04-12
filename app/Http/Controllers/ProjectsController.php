@@ -66,6 +66,7 @@ class ProjectsController extends Controller
         $project->title = $request->input('title');
         $project->body =  strip_tags($request->input('body'));
         $project->user_id = auth()->user()->id;
+        $project->is_gp = 0;
         $project->save();
 
         return redirect('/dashboard')->with('success', 'Project Created');

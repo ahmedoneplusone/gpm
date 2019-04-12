@@ -15,7 +15,7 @@
     	<div class="row">
     		<div class="col-md-3 col-sm-12 col-xs-12">
     			<div class="_con_card" style="height: 250px;">
-    				<h1 class="h1_optimzed"> <i class="fas fa-bell"></i> <b>RECENET FACULITIES</b></h1>
+    				<h1 class="h1_optimzed"> <i class="fas fa-bell"></i> <b>RECENT FACULTIES</b></h1>
     				<div class="Content-Li">
     					@if(count($companies) >= 1)
     							@foreach($companies as $company)

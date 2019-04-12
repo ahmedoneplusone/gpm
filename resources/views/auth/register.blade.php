@@ -3,7 +3,7 @@
 @section('content')
 
 <?php
-    $facs = \App\User::where('type','F')->get();
+    $facs = \App\Faculty::get();
     $deps = \App\Departments::get();
  ?>
 <div class="container">
@@ -208,7 +208,7 @@
                                                 <option selected disabled> SELECET YOUR FACULTY.</option>
                                                 @foreach($facs as $fac)
                                                     <option value="{{$fac->id}}">
-                                                        {{$fac->name}}
+                                                        {{$fac->little_name}}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -245,7 +245,25 @@
                           <div class="swiper-slide">
                             <div class="panel-heading"><i class="fas fa-plus-square"></i> <b> As STUDENT?</b>
                              <small style="display: block;color: #e74c3c;">SWAP RIGHT TO GET COMPANY FORM OR LEFT TO GET PROFESSORS FORM</small></div>
-                              
+                                    
+
+                                    <div class="form-group{{ $errors->has('student_id') ? ' has-error' : '' }}">
+                                        
+                                        <div class="col-md-8 col-md-offset-2">
+                                            <div class="absoluteRightTop text-right">
+                                                <i class="fas fa-user-tie"></i>
+                                            </div>
+                                            <input  type="number" style="width: 100%" class="search_iput" name="student_id" placeholder=" ID" value="{{ old('student_id') }}"  autofocus>
+
+                                            @if ($errors->has('student_id'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('student_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                         
                                         <div class="col-md-8 col-md-offset-2">
@@ -316,10 +334,10 @@
                                     <div class="form-group">
                                         <div class="col-md-8 col-md-offset-2">
                                             <select class="search_iput" style="width:100%" name="st_fac_name">
-                                                <option selected disabled> SELECET YOUR FACULTY.</option>
+                                                <option selected disabled> SELECT YOUR FACULTY.</option>
                                                 @foreach($facs as $fac)
                                                     <option value="{{$fac->id}}">
-                                                        {{$fac->name}}
+                                                        {{$fac->little_name}}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -329,11 +347,14 @@
                                     <div class="form-group">
                                         <div class="col-md-8 col-md-offset-2">
                                             <select class="search_iput" style="width:100%" name="st_fac_dept">
-                                                <option selected disabled> SELECET YOUR DEPARTMENT.</option>
+                                                <option selected disabled> SELECT YOUR DEPARTMENT.</option>
                                                 @foreach($deps as $dep)
-                                                    <option value="{{$dep->id}}">
-                                                        {{$dep->name}}
-                                                    </option>
+
+                                                        <option value="{{$dep->id}}">
+                                                            {{$dep->name}}
+                                                        </option>
+
+
                                                 @endforeach
                                             </select>
                                         </div>
