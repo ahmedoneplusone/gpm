@@ -52,9 +52,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            // 'name' => 'required|string|max:255',
+            // 'email' => 'required|string|email|max:255|unique:users',
+            // 'password' => 'required|string|min:8|confirmed',
             
         ]);
     }
@@ -77,80 +77,81 @@ class RegisterController extends Controller
 
         //Register AS FACUlTY
 
-        if($data['l-name'] && $data['sub-domain'])
+        if($data['submit'] == 'fac')
         {
                
 
                 $fac = new User();
-                $fac->name=$data['name'];
-                $fac->email=$data['email'];
-                $fac->password=bcrypt($data['password']);
-                $fac->phone=$data['phone'];
+                $fac->name=$data['name_fa'];
+                $fac->email=$data['email_fa'];
+                $fac->password=bcrypt($data['password_fa']);
+                $fac->phone=$data['phone_fa'];
                 $fac->type="F";
                 $fac->save();
 
                 $newFac = new Faculty();
                 $newFac->user_id = $fac->id;
-                $newFac->little_name = $data['l-name'];
-                $newFac->sub_domain = $data['sub-domain'];
+                $newFac->little_name = $data['l-name_fa'];
+                $newFac->sub_domain = $data['sub-domain_fa'];
                 $newFac->save();
 
                 return $fac;
         }
-        elseif ($data['fac_name'] && $data['dept'])
+        elseif ($data['submit'] == 'prof')
         {
            
                 $prof = new User();
-                $prof->name=$data['name'];
-                $prof->email=$data['email'];
-                $prof->password=bcrypt($data['password']);
-                $prof->phone=$data['phone'];
+                $prof->name=$data['name_prof'];
+                $prof->email=$data['email_prof'];
+                $prof->password=bcrypt($data['password_prof']);
+                $prof->phone=$data['phone_prof'];
                 $prof->type="P";
                 $prof->save();
 
                 $newPro = new Professor();
                 $newPro->user_id = $prof->id;
-                $newPro->faculty = $data['fac_name'];
-                $newPro->dept = $data['dept'];
+                $newPro->faculty_id = $data['fac_name_prof'];
+                $newPro->dept_id = $data['dept_prof'];
                 $newPro->save();
                 return $prof;
         }
-        elseif ($data['st_fac_name'] && $data['st_fac_dept'])
+        elseif ($data['submit'] == 'stu')
         {
           
                 $std = new User();
-                $std->name=$data['name'];
-                $std->email=$data['email'];
-                $std->password=bcrypt($data['password']);
-                $std->phone=$data['phone'];
+                $std->name=$data['name_stu'];
+                $std->email=$data['email_stu'];
+                $std->password=bcrypt($data['password_stu']);
+                $std->phone=$data['phone_stu'];
                 $std->type="S";
                 $std->save();
 
                 
 
-                $newStd = new Professor();
+                $newStd = new Student();
                 $newStd->user_id = $std->id;
-                $newStd->faculty = $data['st_fac_name'];
-                $newStd->dept = $data['st_fac_dept'];
+                $newStd->student_id = $data['student_id_stu'];
+                $newStd->faculty_id = $data['st_fac_name_stu'];
+                $newStd->dept_id = $data['st_fac_dept_stu'];
                 $newStd->save();
 
                 return $std; 
         }
-        elseif ($data['desc'] && $data['Address']) {
-           
+        elseif ($data['submit'] == 'com') {
+           dd($data['submit']);
                 $comp = new User();
-                $comp->name=$data['name'];
-                $comp->email=$data['email'];
-                $comp->password=bcrypt($data['password']);
-                $comp->phone=$data['phone'];
+                $comp->name=$data['name_com'];
+                $comp->email=$data['email_com'];
+                $comp->password=bcrypt($data['password_com']);
+                $comp->phone=$data['phone_com'];
                 $comp->type="C";
                 $comp->save();
 
-                $newStd = new Professor();
-                $newStd->user_id = $std->id;
-                $newStd->description = $data['desc'];
-                $newStd->address = $data['Address'];
-                $newStd->save();
+                $Company = new Company();
+                $Company->user_id = $comp->id;
+                $Company->description = $data['desc_com'];
+                $Company->address = $data['Address_com'];
+                $Company->save();
                 return $comp ; 
         }
 

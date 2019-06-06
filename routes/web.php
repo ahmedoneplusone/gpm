@@ -24,6 +24,12 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 
 });
 
+Route::group(['middleware' => ['auth', 'Doctor']], function() {
+
+		
+
+});
+
 Route::group(['middleware' => ['auth', 'student']], function() {
 	
 		Route::get('student/home', 'StudentController@index');
