@@ -9,7 +9,7 @@
     			<button type="submit" class="_search_submit"><i class="fa fa-search"></i></button>
     		</form>
     	</div>
-    </div>
+    </div> 
     <br><br>
     <div class="container">
     	<div class="row">
@@ -18,11 +18,13 @@
     				<h1 class="h1_optimzed"> <i class="fas fa-bell"></i> <b>RECENT FACULTIES</b></h1>
     				<div class="Content-Li">
     					@if(count($companies) >= 1)
-    							@foreach($companies as $company)
+    							@foreach($fcus as $fcu)
     							<ul>
 		    						<li>
-		    							<span><b>{{$company->user->name}}</b></span> 
-		    							<p style="line-height: .5;"> <small><strong>2 min ago</strong></small></p>
+		    							<span><b>{{substr($fcu->user->name,0,25)}}@if(strlen($fcu->user->name) > 25) .. @endif</b></span> 
+		    							<p style="line-height: .5;"> <small><strong>
+                                            2 min ago
+                                        </strong></small></p>
 		    						</li>
 	    						</ul>
 	    						@endforeach
@@ -42,7 +44,7 @@
     							@foreach($companies as $company)
     							<ul>
 		    						<li>
-		    							<span><b>{{$company->user->name}}</b></span> 
+		    							<span><b>{{substr($company->user->name,0,25)}}@if(strlen($company->user->name) > 25) .. @endif</b></span> 
 		    							<p style="line-height: .5;"> <small><strong>2 min ago</strong></small></p>
 		    						</li>
 	    						</ul>

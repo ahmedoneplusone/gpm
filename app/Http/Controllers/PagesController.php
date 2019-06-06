@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Company;
 use App\Project;
+use App\Faculty;
 
 class PagesController extends Controller
 {
@@ -35,7 +36,8 @@ class PagesController extends Controller
 
         $comps = Company::get();
         $projs = Project::get();
-        return view('pages.index')->with(['companies'=>$comps,'projects'=>$projs]);
+        $fcus  = Faculty::get();
+        return view('pages.index')->with(['companies'=>$comps,'projects'=>$projs,'fcus'=>$fcus]);
     }
 
     public function about(){
