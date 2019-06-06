@@ -21,7 +21,7 @@
     							@foreach($companies as $company)
     							<ul>
 		    						<li>
-		    							<span><b>{{$company->user->name}}</b></span> 
+		    							<span><b>{{$company->user->name}}</b></span>
 		    							<p style="line-height: .5;"> <small><strong>2 min ago</strong></small></p>
 		    						</li>
 	    						</ul>
@@ -37,12 +37,12 @@
     			<div class="_con_card" style="height: 250px;">
     				<h1 class="h1_optimzed"> <i class="fas fa-bell"></i> <b>RECENET COMPANIES</b></h1>
     				<div class="Content-Li">
-    					
+
     						@if(count($companies) >= 1)
     							@foreach($companies as $company)
     							<ul>
 		    						<li>
-		    							<span><b>{{$company->user->name}}</b></span> 
+		    							<span><b>{{$company->user->name}}</b></span>
 		    							<p style="line-height: .5;"> <small><strong>2 min ago</strong></small></p>
 		    						</li>
 	    						</ul>
@@ -52,7 +52,7 @@
     								<p style="color:#e74c3c"><small><strong>NO COMPAINES YET</strong></small></p>
     							</div>
     						@endif
-    					
+
     				</div>
     			</div>
     		</div>
@@ -62,13 +62,13 @@
     				@if(count($projects) >= 1)
     					<ul>
 	    					@foreach($projects as $project)
-	    						
+
 	    							<li>
 	    								<div class="Projects">
-		    								
+
 		    							</div>
 	    							</li>
-	    						
+
 	    					@endforeach
     					</ul>
     				@else
@@ -80,5 +80,5 @@
     		</div>
     	</div>
     </div>
-    
+
 @endsection
