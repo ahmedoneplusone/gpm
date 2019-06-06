@@ -40,7 +40,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
 
     /**
@@ -137,8 +137,8 @@ class RegisterController extends Controller
 
                 return $std; 
         }
-        elseif ($data['submit'] == 'com') {
-           dd($data['submit']);
+        elseif ($data['submit'] == 'comp') {
+
                 $comp = new User();
                 $comp->name=$data['name_com'];
                 $comp->email=$data['email_com'];
