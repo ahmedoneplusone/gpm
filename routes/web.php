@@ -16,6 +16,9 @@ Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
 
+Route::group(['middleware' => 'auth'], function() {
+    Route::post('AddProject', 'DashboardController@SubmitProject');
+});
 
 Route::group(['middleware' => ['auth', 'admin']], function() {
 
@@ -47,3 +50,4 @@ Route::group(['middleware' => ['auth', 'student']], function() {
 		Route::post('student/register_gp_Project_post', 'StudentController@register_gp_Project_post');
 
 });
+
