@@ -21,8 +21,9 @@ class CreateDepartmentsTable extends Migration
             ->on('faculties')
             ->onDelete('cascade');
             $table->string('name');
-            $table->string('Students_Registered');
-            $table->string('Doctors_Registered');
+            $table->string('short_name');
+            $table->string('number_of_students');
+            $table->string('number_of_doctors');
             $table->timestamps();
         });
     }

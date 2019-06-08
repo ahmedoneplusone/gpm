@@ -21,8 +21,6 @@
     							@foreach($fcus as $fcu)
     							<ul>
 		    						<li>
-		    							<span><b>{{$fcu->user->name}}</b></span>
-		    							<p style="line-height: .5;"> <small><strong>2 min ago</strong></small></p>
 		    							<span><b>{{substr($fcu->user->name,0,25)}}@if(strlen($fcu->user->name) > 25) .. @endif</b></span>
 		    							<p style="line-height: .5;"> <small><strong>
                                             2 min ago
@@ -46,7 +44,7 @@
     							@foreach($companies as $company)
     							<ul>
 		    						<li>
-		    							<span><b>{{$company->user->name}}</b></span>
+		    							
 		    							<span><b>{{substr($company->user->name,0,25)}}@if(strlen($company->user->name) > 25) .. @endif</b></span>
 		    							<p style="line-height: .5;"> <small><strong>2 min ago</strong></small></p>
 		    						</li>

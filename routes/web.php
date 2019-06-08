@@ -13,7 +13,7 @@ Route::get('/about', 'PagesController@about');
 
 Route::resource('projects', 'ProjectsController');
 Auth::routes();
-
+Route::get('/profile','ProfileController@index');
 Route::get('/dashboard', 'DashboardController@index');
 
 Route::group(['middleware' => 'auth'], function() {

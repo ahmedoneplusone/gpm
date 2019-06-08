@@ -13,26 +13,26 @@ class PagesController extends Controller
     public function index(){
         $title = 'Welcome To GPM!';
 
-        if(auth()->check()){
-          $user_id = auth()->user()->id;
-          $user = User::find($user_id);
+        // if(auth()->check()){
+        //   $user_id = auth()->user()->id;
+        //   $user = User::find($user_id);
 
-          if($user->type == 'a'){
-             session()->put('type','a');
-          }
+        //   if($user->type == 'a'){
+        //      session()->put('type','a');
+        //   }
 
-          elseif ($user->type == 's') {
-             session()->put('type','s');
-          }
+        //   elseif ($user->type == 's') {
+        //      session()->put('type','s');
+        //   }
 
-          elseif ($user->type == 'p') {
-             session()->put('type','p');
-          }
+        //   elseif ($user->type == 'p') {
+        //      session()->put('type','p');
+        //   }
 
-          elseif ($user->type == 'c') {
-             session()->put('type','c');
-          }
-        }
+        //   elseif ($user->type == 'c') {
+        //      session()->put('type','c');
+        //   }
+        // }
 
         $comps = Company::get();
         $projs = Project::get();
