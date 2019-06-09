@@ -14,6 +14,8 @@ Route::get('/about', 'PagesController@about');
 Route::resource('projects', 'ProjectsController');
 Auth::routes();
 Route::get('/profile','ProfileController@index');
+Route::post('/upload/profile','ProfileController@upload');
+Route::post('/upload/faculty-data','ProfileController@uploadfaculty');
 Route::get('/dashboard', 'DashboardController@index');
 
 Route::group(['middleware' => 'auth'], function() {
