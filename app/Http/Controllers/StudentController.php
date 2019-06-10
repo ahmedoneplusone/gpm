@@ -93,6 +93,8 @@ class StudentController extends Controller
 
 
         $studentL = Student::get()->where('user_id',auth()->user()->id)->first();
+        Student::where('team_id',$studentL->team_id)->where('user_id' , '!=' , auth()->user()->id)->delete();
+
 
         $user_0 = new User;
         $user_0->name = $request->input('name_0');
@@ -185,7 +187,7 @@ class StudentController extends Controller
 
         $team = Team::get()->where('id', $studentL->team_id)->first();
         $team->prof_id = $request->input('prof');
-        $team->project_id = Project::orderBy('created_at','DESC')->first()->id;
+        $team->project_id = $project->id;
         $team->save();
 
     	return redirect('/dashboard');

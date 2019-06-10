@@ -16,7 +16,7 @@
                                 <th  class="text-center">Actions</th>
                             </tr>
                             @foreach($projects as $project)
-                                @if($project->is_gp == 0)
+
                                     <tr>
                                         <td>{{$project->title}}</td>
                                         <td  class="text-center"><a href="/projects/{{$project->id}}/edit" class="btn btn-default">Edit</a>
@@ -29,7 +29,7 @@
                                             {!!Form::close()!!}
                                         </td>
                                     </tr>
-                                @endif
+
                             @endforeach
                         </table>
                     @else
