@@ -21,16 +21,16 @@ class StudentController extends Controller
 
     public function register_gp_SLeader (){
 
-        $projects[] = new Project;
-        $projects = Project::all()->where('user_id',auth()->user()->id);
-        
-    	if($projects->count() > 0){
-            foreach ($projects as $p) {
-                if($p->is_gp == 1){
-                    return redirect('/');
-                }
-            }
-    	}
+//        $projects[] = new Project;
+//        $projects = Project::where('user_id',auth()->user()->id)->get();
+//
+//    	if($projects->count() > 0){
+//            foreach ($projects as $p) {
+//                if($p->is_gp == 1){
+//                    return redirect('/');
+//                }
+//            }
+//    	}
 
         $studentL = Student::get()->where('user_id',auth()->user()->id)->first();
 
@@ -40,15 +40,17 @@ class StudentController extends Controller
     public function register_gp_SLeader_post (Request $request){
     	
        
+        $teamExist = Team::where('leader_id' , auth()->user()->id)->first();
 
-        $team = new Team;
-		$team->leader_id = auth()->user()->id;
-        $team->save();
+        if($teamExist == null) {
+            $team = new Team;
+            $team->leader_id = auth()->user()->id;
+            $team->save();
 
-        $studentL = Student::get()->where('user_id',auth()->user()->id)->first();
-        $studentL->team_id = Team::orderBy('created_at','DESC')->first()->id;
-        $studentL->save();
-
+            $studentL = Student::get()->where('user_id', auth()->user()->id)->first();
+            $studentL->team_id = Team::orderBy('created_at', 'DESC')->first()->id;
+            $studentL->save();
+        }
 		return redirect('student/register_gp_Members');
     }
 
@@ -61,16 +63,16 @@ class StudentController extends Controller
 
     	$this->validate($request, [
             'name_0' => 'required',
-            'email_0' => 'required',
+            'email_0' => 'unique:users,email,required',
             'student_id_0' => 'required',
             'name_1' => 'required',
-            'email_1' => 'required',
+            'email_1' => 'unique:users,email,required',
             'student_id_1' => 'required',
             'name_2' => 'required',
-            'email_2' => 'required',
+            'email_2' => 'unique:users,email,required',
             'student_id_2' => 'required',
             'name_3' => 'required',
-            'email_3' => 'required',
+            'email_3' => 'unique:users,email,required',
             'student_id_3' => 'required',
 
         ],[],[
@@ -87,7 +89,6 @@ class StudentController extends Controller
             "name_3" => "Fourth Member's Name",
             "email_3" => "Fourth Member's E-mail",
             "student_id_3" => "Fourth Member's ID",
-
         ]);
 
 
@@ -96,7 +97,7 @@ class StudentController extends Controller
         $user_0 = new User;
         $user_0->name = $request->input('name_0');
         $user_0->email = $request->input('email_0'); 
-		$user_0->password = bcrypt("".rand(10000000,9999999999));
+		$user_0->password = bcrypt("".rand(10000000,mt_getrandmax()));
         $user_0->type = 's';
         $user_0->save();
 
@@ -112,7 +113,7 @@ class StudentController extends Controller
 		$user_1 = new User;
         $user_1->name = $request->input('name_1');
         $user_1->email = $request->input('email_1'); 
-		$user_1->password = bcrypt("".rand(10000000,9999999999));
+		$user_1->password = bcrypt("".rand(10000000,mt_getrandmax()));
         $user_1->type = 's';
         $user_1->save(); 
 
@@ -127,7 +128,7 @@ class StudentController extends Controller
 		$user_2 = new User;
         $user_2->name = $request->input('name_2');
         $user_2->email = $request->input('email_2'); 
-		$user_2->password = bcrypt("".rand(10000000,9999999999));
+		$user_2->password = bcrypt("".rand(10000000,mt_getrandmax()));
         $user_2->type = 's';
         $user_2->save(); 
 
@@ -143,7 +144,7 @@ class StudentController extends Controller
 		$user_3 = new User;
         $user_3->name = $request->input('name_3');
         $user_3->email = $request->input('email_3'); 
-		$user_3->password = bcrypt("".rand(10000000,9999999999));
+		$user_3->password = bcrypt("".rand(10000000,mt_getrandmax()));
         $user_3->type = 's';
         $user_3->save();
 

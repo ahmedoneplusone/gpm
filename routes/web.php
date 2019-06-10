@@ -12,6 +12,8 @@ Route::get('/home', 'PagesController@index');
 Route::get('/about', 'PagesController@about');
 
 Route::resource('projects', 'ProjectsController');
+Route::get('gp_project', 'ProjectsController@gp_project_view');
+Route::post('gp_project', 'ProjectsController@gp_project');
 Auth::routes();
 Route::get('/profile','ProfileController@index');
 Route::post('/upload/profile','ProfileController@upload');

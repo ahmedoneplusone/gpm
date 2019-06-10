@@ -35,6 +35,10 @@ class ProjectsController extends Controller
         $projects = Project::orderBy('created_at','desc')->paginate(10);
         return view('projects.index')->with('projects', $projects);
     }
+    public function gp_project_view()
+    {
+        return view('projects.gp_project');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -59,14 +63,34 @@ class ProjectsController extends Controller
             'body' => 'required',
         ]);
 
-      
-       
+
+
         // Create project
         $project = new Project;
         $project->title = $request->input('title');
         $project->body =  strip_tags($request->input('body'));
         $project->user_id = auth()->user()->id;
         $project->is_gp = 0;
+        $project->save();
+
+        return redirect('/dashboard')->with('success', 'Project Created');
+    }
+
+    public function gp_project(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+
+
+        // Create project
+        $project = new Project;
+        $project->title = $request->input('title');
+        $project->body =  strip_tags($request->input('body'));
+        $project->user_id = auth()->user()->id;
+        $project->is_gp = 1;
         $project->save();
 
         return redirect('/dashboard')->with('success', 'Project Created');
