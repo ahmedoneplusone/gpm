@@ -64,7 +64,7 @@
 
                                         <div class="col-md-8 col-md-offset-2">
                                             
-                                            <select class="search_iput" style="width:100%" name="prof">
+                                            <select required class="search_iput" style="width:100%" name="prof">
 
                                                 <option selected disabled>Select your Professor Supervisor.</option>
 

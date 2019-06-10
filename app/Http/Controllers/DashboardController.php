@@ -29,8 +29,9 @@ class DashboardController extends Controller
 
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        $projectIdeas = Project::all()->where('user_id','=',$user_id)->where('is_gp', '=' , 0);
-        $gp = Project::all()->where('user_id','=',$user_id)->where('is_gp', '=' , 1)->first();
+        $projectIdeas = Project::all()->where('user_id','=',$user_id);
+            //->where('is_gp', '=' , 0);
+       // $gp = Project::all()->where('user_id','=',$user_id)->where('is_gp', '=' , 1)->first();
 
 //        if($user->type == 's'){
 //
@@ -41,7 +42,7 @@ class DashboardController extends Controller
 //
 //            }
 //        }
-        return view('dashboard',['projects'=>$projectIdeas,'gp'=>$gp]);
+        return view('dashboard',['projects'=>$projectIdeas]);
         //return view('dashboard',['projects'=>$projectIdeas]);
     }
 

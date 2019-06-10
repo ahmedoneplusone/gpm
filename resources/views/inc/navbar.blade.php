@@ -28,6 +28,7 @@
               <li><a href="/"> <i class="fas fa-home"></i> <b>HOME</b></a></li>
               <li><a href="/about"> <i class="fab fa-weixin"></i> <b>ABOUT</b></a></li>
               <li><a href="/projects"> <i class="fas fa-database"></i><b> PROJECTS IDEAS</b></a></li>
+              <li><a href="/student/register_gp_SLeader"> <i class="fas fa-plus"></i><b> Rejester Your Team</b></a></li>
 
 
              @if(Auth::check())
