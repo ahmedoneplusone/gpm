@@ -41,4 +41,20 @@ class DepartmentsController extends Controller
 
         return redirect('/departments');
 	}
+
+	public function edit(Request $request)
+	{
+		$this->validate($request, [
+            'depName' => 'required|string|max:191',
+            'ShortdepName'=>'required|string|max:191',
+        ]);
+
+        $Department = Departments::where('id',$request->id)->first();
+        $Department->fac_id = auth()->user()->id;
+        $Department->name = $request->depName;
+        $Department->short_name = $request->ShortdepName;
+        $Department->save();
+
+        return redirect('/departments');
+	}
 }
