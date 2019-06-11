@@ -2,8 +2,8 @@
 
 
 <?php
-    $user_profs = \App\User::get();
-    $prof = new \App\Professor;
+//    $user_profs = \App\User::get();
+//    $prof = new \App\Professor;
     $studL = \App\Student::get()->where('user_id',auth()->user()->id)->first();
  ?>
 @section('content')
@@ -61,35 +61,47 @@
         
 
                             <div class="row form-group">
-
-                                        <div class="col-md-8 col-md-offset-2">
-                                            
-                                            <select required class="search_iput" style="width:100%" name="prof">
-
-                                                <option selected disabled>Select your Professor Supervisor.</option>
-
-                                                @foreach($user_profs as $user_prof)
-
-                                                    @if($user_prof->type == 'p')
-
-                                                        {{ $prof =  \App\Professor::get()->where('user_id',$user_prof->id)->first() }}
-
-                                                        @if($prof->dept_id == $studL->dept_id)
-
-                                                            <option value="{{$user_prof->id}}">
-                                                                {{$user_prof->name}}
-                                                            </option>
-
-                                                        @endif
-
-                                                    @endif
-
-                                                @endforeach
-
-                                            </select>
-
-                                        </div>
-                                    </div>
+                                <div class="col-md-8 col-md-offset-2">
+                                    <select required class="search_iput" style="width:100%" name="prof">
+                                        <option selected disabled>Select your Professor Supervisor 1.</option>
+                                        @foreach($doctors as $doctor)
+                                            @if($doctor->dept_id == $studL->dept_id)
+                                                <option value="{{$doctor->id}}">
+                                                    {{$doctor->user->name}}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+  <div class="row form-group">
+      <div class="col-md-8 col-md-offset-2">
+          <select required class="search_iput" style="width:100%" name="prof2">
+              <option selected disabled>Select your Professor Supervisor 2.</option>
+              @foreach($doctors as $doctor)
+                  @if($doctor->dept_id == $studL->dept_id)
+                      <option value="{{$doctor->id}}">
+                          {{$doctor->user->name}}
+                      </option>
+                  @endif
+              @endforeach
+          </select>
+      </div>
+  </div>
+  <div class="row form-group">
+      <div class="col-md-8 col-md-offset-2">
+          <select required class="search_iput" style="width:100%" name="prof3">
+              <option selected disabled>Select your Professor Supervisor 3.</option>
+              @foreach($doctors as $doctor)
+                  @if($doctor->dept_id == $studL->dept_id)
+                      <option value="{{$doctor->id}}">
+                          {{$doctor->user->name}}
+                      </option>
+                  @endif
+              @endforeach
+          </select>
+      </div>
+  </div>
 
          <div class="row form-group">
 

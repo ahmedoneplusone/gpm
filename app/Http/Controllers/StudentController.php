@@ -7,6 +7,8 @@ use App\Project;
 use App\Student;
 use App\Team;
 use App\User;
+use App\Professor;
+use App\TeamRequestDoctor;
 
 use Illuminate\Support\Facades\Crypt;
 
@@ -163,8 +165,10 @@ class StudentController extends Controller
 
     public function register_gp_Project(){
 
-
-    	return view('students.register_gp_Project');
+        $prof = Professor::get();
+    	return view('students.register_gp_Project')->with([
+    	    'doctors'=>$prof
+        ]);
     }
 
     public function register_gp_Project_post(Request $request){
@@ -186,9 +190,28 @@ class StudentController extends Controller
         $studentL = Student::get()->where('user_id',auth()->user()->id)->first();
 
         $team = Team::get()->where('id', $studentL->team_id)->first();
-        $team->prof_id = $request->input('prof');
+        //$team->prof_id = $request->input('prof');
         $team->project_id = $project->id;
         $team->save();
+        TeamRequestDoctor::where('team_id',$studentL->team_id)->delete();
+
+        $TeamRequestDoctor = new TeamRequestDoctor();
+        $TeamRequestDoctor->team_id = $studentL->team_id;
+        $TeamRequestDoctor->project_id = $project->id;
+        $TeamRequestDoctor->prof_id = $request->input('prof');
+        $TeamRequestDoctor->save();
+
+        $TeamRequestDoctor = new TeamRequestDoctor();
+        $TeamRequestDoctor->team_id = $studentL->team_id;
+        $TeamRequestDoctor->project_id = $project->id;
+        $TeamRequestDoctor->prof_id = $request->input('prof2');
+        $TeamRequestDoctor->save();
+
+        $TeamRequestDoctor = new TeamRequestDoctor();
+        $TeamRequestDoctor->team_id = $studentL->team_id;
+        $TeamRequestDoctor->project_id = $project->id;
+        $TeamRequestDoctor->prof_id = $request->input('prof3');
+        $TeamRequestDoctor->save();
 
     	return redirect('/dashboard');
     }
