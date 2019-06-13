@@ -144,5 +144,39 @@
     			</div>
     			
 			</div>
+	<div class="col-lg-6"></div>		
+	<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+		<div class="_con_card" style="height: 250px;">
+			<h1 class="h1_optimzed"> <i class="fas fa-bell"></i> <b>Students In Faculty</b>
+    			
+    		</h1>
+    		<hr>
+    		<div class="Content-Li">
+    			@if(count($students) >= 1)
+    				@foreach($students as $student)
+    				<p><b style="display: block">{{$student->user->name}}</b><small>{{$student->student_id}}</small></p>
+    			@endforeach
+    			@else
+    				<div style="text-align: center;color:red"><b>No Professors</b></div>
+    			@endif
+    		</div>	
+		</div>
+		<br>
+		<div class="_con_card" style="height: 250px;">
+			<h1 class="h1_optimzed"> <i class="fas fa-bell"></i> <b>Professors In Faculty</b>
+    			
+    		</h1>
+    		<hr>
+    		<div class="Content-Li">
+    			@if(count($professors)>=1)
+    				@foreach($professors as $professor)
+    				<p><b style="display: block">{{$professor->user->name}}</b><small></small></p>
+    				@endforeach
+    			@else
+    				<div style="text-align: center;color:red"><b>No Professors</b></div>
+    			@endif
+    		</div>	
+		</div>
+	</div>
 </div>
 @endsection

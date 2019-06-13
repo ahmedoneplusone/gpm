@@ -52,7 +52,7 @@ class DepartmentsController extends Controller
         $Department = Departments::where('id',$request->id)->first();
         $Department->fac_id = auth()->user()->id;
         $Department->name = $request->depName;
-        $Department->short_name = $request->ShortdepName;
+        $Department->short_name = $request->ShortdepName;	
         $Department->save();
 
         return redirect('/departments');

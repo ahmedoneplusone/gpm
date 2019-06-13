@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Faculty;
 use App\Departments;
+use App\Student;
+use App\Professor;
 class ProfileController extends Controller
 {
       public function __construct()
@@ -35,7 +37,9 @@ class ProfileController extends Controller
           elseif ($user->type == 'F') {
               $faculty = Faculty::where('user_id',$user->id)->first();
               $departments = Departments::where('fac_id',$faculty->id)->get();
-              return view('faculty.profile')->with(['faculty'=>$faculty,'departments'=>$departments]);
+              $students = Student::where('faculty_id',$faculty->id)->get();
+              $professors = Professor::where('faculty_id',$faculty->id)->get();
+              return view('faculty.profile')->with(['faculty'=>$faculty,'departments'=>$departments,'students'=>$students,'professors'=>$professors]);
           }
         }
 	  }
