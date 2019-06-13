@@ -118,7 +118,7 @@
     		<div class="_con_card" style="height: 250px;">
     				<h1 class="h1_optimzed"> <i class="fas fa-bell"></i> <b>Faculty Departments</b>
     					<a href="{{url('/')}}/departments" style="color:#3498db;float:right;padding-right:15px;cursor:pointer" data-toggle="tooltip" data-placement="right" title="Edit Personal Data !"><i class="fas fa-edit" ></i></a>
-    					<a href="#" style="color:#3498db;float:right;padding-right:15px;cursor:pointer" data-toggle="tooltip" data-placement="top" title="Add New Departments !"><i class="fas fa-plus" ></i></a>
+    					<a href="{{url('/')}}/departments" style="color:#3498db;float:right;padding-right:15px;cursor:pointer" data-toggle="tooltip" data-placement="top" title="Add New Departments !"><i class="fas fa-plus" ></i></a>
     				</h1>
     				<hr>
 

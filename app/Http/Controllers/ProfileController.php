@@ -63,7 +63,7 @@ class ProfileController extends Controller
 	  	 }
 	  	 else
 	  	 {
-	  	 	return redirect('/profile')->with('error','Your Old Password is incorrect');
+	  	 	return redirect('/profile')->with('error','Your Password is incorrect');
 	  	 }
 	  }
 
@@ -88,7 +88,7 @@ class ProfileController extends Controller
 	  	 }
 	  	 else
 	  	 {
-	  	 	return redirect('/profile')->with('error','Your Old Password is incorrect');
+	  	 	return redirect('/profile')->with('error','Your Password is incorrect');
 	  	 }
 	  }
 }

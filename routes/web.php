@@ -21,6 +21,7 @@ Route::post('/upload/faculty-data','ProfileController@uploadfaculty');
 Route::get('/dashboard', 'DashboardController@index');
 Route::get('/departments','DepartmentsController@index');
 Route::post('/departments/add','DepartmentsController@store');
+Route::post('/departments/edit','DepartmentsController@edit');
 Route::group(['middleware' => 'auth'], function() {
     Route::post('AddProject', 'DashboardController@SubmitProject');
 });
