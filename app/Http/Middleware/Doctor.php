@@ -15,7 +15,7 @@ class Doctor
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->type == 'S'){
+        if(auth()->user()->type == 'p'){
             return $next($request);
         }
         return redirect('login')->with('error','You have not doctor access');
