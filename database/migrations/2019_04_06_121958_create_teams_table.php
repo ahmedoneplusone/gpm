@@ -21,7 +21,7 @@ class CreateTeamsTable extends Migration
 
             $table->foreign('prof_id')
             ->references('id')
-            ->on('users')
+            ->on('professors')
             ->onDelete('cascade');
 
             $table->foreign('project_id')

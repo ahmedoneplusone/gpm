@@ -9,7 +9,7 @@ class Student extends Model
 
 
 	public function user(){
-        return $this->hasOne('App\User');
+        return $this->hasOne('App\User','id','user_id');
     }
     public function team(){
         return $this->belongsTo('App\Team');

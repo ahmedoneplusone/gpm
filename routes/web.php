@@ -33,10 +33,16 @@ Route::group(['middleware' => ['auth', 'admin']], function() {
 });
 
 Route::group(['middleware' => ['auth', 'Doctor']], function() {
+    Route::get('prof/open_registraion_date', 'ProfessorController@open_registraion_date');
+    Route::post('prof/open_registraion_date', 'ProfessorController@open_registraion_date_post');
 
-		
+
+
+    Route::get('prof/student_requests', 'ProfessorController@student_requests');
+    Route::post('prof/student_requests', 'ProfessorController@student_requests_post');
 
 });
+Route::get('team/{id}', 'ProfessorController@team');
 
 Route::group(['middleware' => ['auth', 'student']], function() {
 	
