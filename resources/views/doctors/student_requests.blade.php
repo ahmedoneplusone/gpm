@@ -57,8 +57,8 @@
                                 <br><br><br>
                                 <input type="hidden" name="team_id" value="{{$TeamRequestDocto->team_id}}" >
                                 <div class="text-center">
-                                    <button type="submit" value="1" class="btn btn-primary">Accept</button>
-                                    <button type="submit" value="0" class="btn btn-primary">Refuse</button>
+                                    <button type="submit" name="accept" value="1" class="btn btn-primary">Accept</button>
+                                    <button type="submit" name="accept" value="0" class="btn btn-primary">Refuse</button>
                                 </div>
                             </form>
                         </div>
