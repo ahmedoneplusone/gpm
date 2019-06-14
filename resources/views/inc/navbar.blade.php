@@ -28,6 +28,7 @@
               <li><a href="/"> <i class="fas fa-home"></i> <b>HOME</b></a></li>
               <li><a href="/about"> <i class="fab fa-weixin"></i> <b>ABOUT</b></a></li>
               <li><a href="/projects"> <i class="fas fa-database"></i><b> PROJECTS IDEAS</b></a></li>
+              @if(Auth::check())
                 @if(Auth::user()->type == 's')
                 <li><a href="/student/register_gp_SLeader"> <i class="fas fa-plus"></i><b> Rejester Your Team</b></a></li>
                 @endif
@@ -35,13 +36,13 @@
                     <li><a href="/prof/open_registraion_date"> <i class="fas fa-plus"></i><b> Open Registraion Date</b></a></li>
                     <li><a href="/prof/student_requests"> <i class="glyphicon glyphicon-eye-open"></i><b> Student Requests</b></a></li>
                 @endif
-@if(Auth::check())
-@if(session()->get('type') == 'a')
+                
+                @if(session()->get('type') == 'a')
 
-     <li><a href="admin/all_users"> <i class="far fa-user"></i> Users</a></li>
+                     <li><a href="admin/all_users"> <i class="far fa-user"></i> Users</a></li>
 
-@endif
-@endif
+                @endif
+                @endif
 
 @if(Auth::check())
 @if(session()->get('type') == 's')

@@ -20,6 +20,8 @@ class CreateStudentsTable extends Migration
             $table->bigInteger('faculty_id')->unsigned()->nullable();
             $table->bigInteger('dept_id')->unsigned()->nullable();
             $table->bigInteger('team_id')->unsigned()->nullable();
+            
+
             $table->timestamps();
 
             $table->foreign('user_id')
