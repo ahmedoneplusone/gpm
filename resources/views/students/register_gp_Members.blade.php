@@ -14,14 +14,7 @@
     {!! Form::open(['action' => 'StudentController@register_gp_Members_post', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
 
 
-            <div class="row  form-group">
-            <div class="col-md-8 col-md-offset-2">
-                
-            {!! Form::select('members_number', array('4' => 'Four', '5' => 'Five','6' => 'Six'), 'Four'); !!}
-            {{Form::label('members_number', 'Members')}}
-
-            </div>
-            </div>
+            
 
             @for($i=0 ; $i < 4 ; $i++)
 

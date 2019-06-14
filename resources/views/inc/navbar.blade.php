@@ -28,12 +28,24 @@
               <li><a href="/"> <i class="fas fa-home"></i> <b>HOME</b></a></li>
               <li><a href="/about"> <i class="fab fa-weixin"></i> <b>ABOUT</b></a></li>
               <li><a href="/projects"> <i class="fas fa-database"></i><b> PROJECTS IDEAS</b></a></li>
-                @if(Auth::user()->type == 's')
-                <li><a href="/student/register_gp_SLeader"> <i class="fas fa-plus"></i><b> Rejester Your Team</b></a></li>
-                @endif
-                @if(Auth::user()->type == 'p')
-                    <li><a href="/prof/open_registraion_date"> <i class="fas fa-plus"></i><b> Open Registraion Date</b></a></li>
-                    <li><a href="/prof/student_requests"> <i class="glyphicon glyphicon-eye-open"></i><b> Student Requests</b></a></li>
+                @if(Auth::check())
+                    @if(Auth::user()->type == 's')
+                        <?php
+                        $student =  App\Student::where('user_id' , Auth::user()->id)->first();
+
+                        ?>
+@if($student->team)
+    @if($student->team->TeamRequestDoctor)
+        <li><a href="/team/{{$student->team->id}}"> <i class="fas fa-plus"></i><b>You Team Details</b></a></li>
+    @endif
+@else
+        <li><a href="/student/register_gp_SLeader"> <i class="fas fa-plus"></i><b> Rejester Your Team</b></a></li>
+@endif
+                    @endif
+                    @if(Auth::user()->type == 'p')
+                        <li><a href="/prof/open_registraion_date"> <i class="fas fa-plus"></i><b> Open Registraion Date</b></a></li>
+                        <li><a href="/prof/student_requests"> <i class="glyphicon glyphicon-eye-open"></i><b> Student Requests</b></a></li>
+                    @endif
                 @endif
 @if(Auth::check())
 @if(session()->get('type') == 'a')

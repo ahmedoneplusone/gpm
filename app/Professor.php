@@ -17,4 +17,7 @@ class Professor extends Model
     public function project(){
         return $this->hasMany('App\Project');
     }
+    public function DoctorRegistration(){
+        return $this->hasMany('App\DoctorRegistration','prof_id','id');
+    }
 }

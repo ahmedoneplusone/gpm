@@ -16,7 +16,15 @@
 
     </div>
   </div>
-  
+  @if($errors->all())
+      <div style="color: #a94442; background-color: #f2dede; border-color: #ebccd1;" class="alert ">
+          <ul>
+              @foreach($errors->all() as $error)
+                  <li>{{$error}}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
      {!! Form::open(['action' => 'StudentController@register_gp_Project_post', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
 
 
