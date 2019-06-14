@@ -86,7 +86,7 @@ class RegisterController extends Controller
                 $fac->email=$data['email_fa'];
                 $fac->password=bcrypt($data['password_fa']);
                 $fac->phone=$data['phone_fa'];
-                $fac->type="F";
+                $fac->type="f";
                 $fac->save();
 
                 $newFac = new Faculty();
@@ -105,7 +105,7 @@ class RegisterController extends Controller
                 $prof->email=$data['email_prof'];
                 $prof->password=bcrypt($data['password_prof']);
                 $prof->phone=$data['phone_prof'];
-                $prof->type="P";
+                $prof->type="p";
                 $prof->save();
 
                 $newPro = new Professor();
@@ -123,7 +123,7 @@ class RegisterController extends Controller
                 $std->email=$data['email_stu'];
                 $std->password=bcrypt($data['password_stu']);
                 $std->phone=$data['phone_stu'];
-                $std->type="S";
+                $std->type="s";
                 $std->save();
 
                 
@@ -144,7 +144,7 @@ class RegisterController extends Controller
                 $comp->email=$data['email_com'];
                 $comp->password=bcrypt($data['password_com']);
                 $comp->phone=$data['phone_com'];
-                $comp->type="C";
+                $comp->type="c";
                 $comp->save();
 
                 $Company = new Company();

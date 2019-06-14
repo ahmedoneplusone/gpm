@@ -165,7 +165,12 @@ class StudentController extends Controller
 
     public function register_gp_Project(){
 
-        $prof = Professor::get();
+        $prof = Professor::whereHas('DoctorRegistration'
+            , function ($query)   {
+                    $query->where('start_date', '<=', date("Y-m-d"));
+                    $query->where('end_date', '>=', date("Y-m-d"));
+
+            })->get();
     	return view('students.register_gp_Project')->with([
     	    'doctors'=>$prof
         ]);
@@ -176,6 +181,9 @@ class StudentController extends Controller
     	$this->validate($request, [
             'title' => 'required',
             'body' => 'required',
+            'prof' => 'required',
+            'prof2' => 'required',
+            'prof3' => 'required',
         ]);
 
 
@@ -200,19 +208,21 @@ class StudentController extends Controller
         $TeamRequestDoctor->project_id = $project->id;
         $TeamRequestDoctor->prof_id = $request->input('prof');
         $TeamRequestDoctor->save();
-
-        $TeamRequestDoctor = new TeamRequestDoctor();
-        $TeamRequestDoctor->team_id = $studentL->team_id;
-        $TeamRequestDoctor->project_id = $project->id;
-        $TeamRequestDoctor->prof_id = $request->input('prof2');
-        $TeamRequestDoctor->save();
-
-        $TeamRequestDoctor = new TeamRequestDoctor();
-        $TeamRequestDoctor->team_id = $studentL->team_id;
-        $TeamRequestDoctor->project_id = $project->id;
-        $TeamRequestDoctor->prof_id = $request->input('prof3');
-        $TeamRequestDoctor->save();
-
+        if($request->input('prof') != $request->input('prof2')) {
+            $TeamRequestDoctor = new TeamRequestDoctor();
+            $TeamRequestDoctor->team_id = $studentL->team_id;
+            $TeamRequestDoctor->project_id = $project->id;
+            $TeamRequestDoctor->prof_id = $request->input('prof2');
+            $TeamRequestDoctor->save();
+        }
+        if($request->input('prof') != $request->input('prof2')&& $request->input('prof3')!=$request->input('prof2')
+        &&$request->input('prof')!= $request->input('prof3')) {
+            $TeamRequestDoctor = new TeamRequestDoctor();
+            $TeamRequestDoctor->team_id = $studentL->team_id;
+            $TeamRequestDoctor->project_id = $project->id;
+            $TeamRequestDoctor->prof_id = $request->input('prof3');
+            $TeamRequestDoctor->save();
+        }
     	return redirect('/dashboard');
     }
 

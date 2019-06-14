@@ -19,4 +19,8 @@ class Team extends Model
         return $this->hasOne('App\User','id','leader_id');
     }
 
+    public function TeamRequestDoctor(){
+        return $this->hasMany('App\TeamRequestDoctor','team_id','id');
+    }
+
 }
