@@ -7,6 +7,7 @@ use App\Faculty;
 use App\Professor;
 use App\Student;
 use App\Company;
+use App\Departments;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -113,6 +114,10 @@ class RegisterController extends Controller
                 $newPro->faculty_id = $data['fac_name_prof'];
                 $newPro->dept_id = $data['dept_prof'];
                 $newPro->save();
+
+                $dep = Departments::where('id',$data['dept_prof'])->first();
+                $dep->number_of_doctors = $dep->number_of_doctors+1;
+                $dep->save(); 
                 return $prof;
         }
         elseif ($data['submit'] == 'stu')
@@ -135,6 +140,9 @@ class RegisterController extends Controller
                 $newStd->dept_id = $data['st_fac_dept_stu'];
                 $newStd->save();
 
+                $dep = Departments::where('id',$data['st_fac_dept_stu'])->first();
+                $dep->number_of_students = $dep->number_of_students+1;
+                $dep->save(); 
                 return $std; 
         }
         elseif ($data['submit'] == 'comp') {

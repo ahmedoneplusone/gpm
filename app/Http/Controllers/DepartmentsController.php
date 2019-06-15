@@ -13,7 +13,7 @@ class DepartmentsController extends Controller
 	    }
 	public function index()
 	{
-		if(auth()->user()->type == 'F')
+		if(auth()->user()->type == 'f')
 		{
 			$departments = Departments::where('fac_id',auth()->user()->id)->get();
 			return view('departments.index')->with('departments',$departments);	

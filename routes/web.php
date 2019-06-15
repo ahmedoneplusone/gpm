@@ -10,7 +10,7 @@ Route::get('/', 'PagesController@index');
 Route::get('/home', 'PagesController@index');
 
 Route::get('/about', 'PagesController@about');
-
+Route::get('/get/deprt/{id}','PagesController@getDepartments');
 Route::resource('projects', 'ProjectsController');
 Route::get('gp_project', 'ProjectsController@gp_project_view');
 Route::post('gp_project', 'ProjectsController@gp_project');

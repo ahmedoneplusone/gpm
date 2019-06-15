@@ -7,6 +7,7 @@ use App\User;
 use App\Company;
 use App\Project;
 use App\Faculty;
+use App\Departments;
 
 class PagesController extends Controller
 {
@@ -48,5 +49,11 @@ class PagesController extends Controller
     public function contact(){
         $title = 'Contact Us';
         return view('pages.contact',['title'=>$title]);
+    }
+
+    public function getDepartments($id)
+    {
+        $depts = Departments::where('fac_id',$id)->get();
+        return $depts;
     }
 }

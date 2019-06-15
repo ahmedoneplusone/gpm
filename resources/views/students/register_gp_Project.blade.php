@@ -8,7 +8,7 @@
  ?>
 @section('content')
 
-  <div class="row  form-group">
+  <div class="form-group">
     <div class="col-md-8 col-md-offset-2">
 
     <h1>Graduation Project</h1>

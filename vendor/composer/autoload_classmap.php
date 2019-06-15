@@ -44,6 +44,7 @@ return array(
     'App\\Student' => $baseDir . '/app/Student.php',
     'App\\Team' => $baseDir . '/app/Team.php',
     'App\\TeamRequestDoctor' => $baseDir . '/app/TeamRequestDoctor.php',
+    'App\\Tools' => $baseDir . '/app/Tools.php',
     'App\\User' => $baseDir . '/app/User.php',
     'BeyondCode\\DumpServer\\DumpServerCommand' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
     'BeyondCode\\DumpServer\\DumpServerServiceProvider' => $vendorDir . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',

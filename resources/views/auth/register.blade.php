@@ -204,7 +204,7 @@
 
                                     <div class="form-group">
                                         <div class="col-md-8 col-md-offset-2">
-                                            <select class="search_iput" style="width:100%" name="fac_name_prof">
+                                            <select class="search_iput" style="width:100%" name="fac_name_prof" id="fac_prof">
                                                 <option selected disabled> SELECET YOUR FACULTY.</option>
                                                 @foreach($facs as $fac)
                                                     <option value="{{$fac->id}}">
@@ -217,13 +217,9 @@
 
                                     <div class="form-group">
                                         <div class="col-md-8 col-md-offset-2">
-                                            <select class="search_iput" style="width:100%" name="dept_prof">
+                                            <select class="search_iput" style="width:100%" name="dept_prof" id="prof_dept">
                                                 <option selected disabled> SELECET YOUR DEPARTMENT.</option>
-                                                @foreach($deps as $dep)
-                                                    <option value="{{$dep->id}}">
-                                                        {{$dep->name}}
-                                                    </option>
-                                                @endforeach
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -333,7 +329,7 @@
 
                                     <div class="form-group">
                                         <div class="col-md-8 col-md-offset-2">
-                                            <select class="search_iput" style="width:100%" name="st_fac_name_stu">
+                                            <select class="search_iput" style="width:100%" name="st_fac_name_stu" id="std_fac">
                                                 <option selected disabled> SELECT YOUR FACULTY.</option>
                                                 @foreach($facs as $fac)
                                                     <option value="{{$fac->id}}">
@@ -346,16 +342,8 @@
 
                                     <div class="form-group">
                                         <div class="col-md-8 col-md-offset-2">
-                                            <select class="search_iput" style="width:100%" name="st_fac_dept_stu">
+                                            <select class="search_iput" style="width:100%" name="st_fac_dept_stu" id="std_fac_dept">
                                                 <option selected disabled> SELECT YOUR DEPARTMENT.</option>
-                                                @foreach($deps as $dep)
-
-                                                        <option value="{{$dep->id}}">
-                                                            {{$dep->name}}
-                                                        </option>
-
-
-                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -478,4 +466,41 @@
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+          $("#fac_prof").change(function(){
+             var selector = document.getElementById('fac_prof');
+                var value = selector[selector.selectedIndex].value;
+            $.ajax({
+                 url: "{{url('/')}}/get/deprt/"+value,
+                 beforeSend: function( xhr ) {
+                 xhr.overrideMimeType( "application/json; charset=utf-8" );
+                          }
+                        }).done(function( data ) {
+                 $.each(data, function(i, item) {
+                    $("#prof_dept").append(new Option(item.short_name, item.id));
+                     });
+                });
+         });
+
+          $("#std_fac").change(function(){
+             var selector = document.getElementById('std_fac');
+                var value = selector[selector.selectedIndex].value;
+            $.ajax({
+                 url: "{{url('/')}}/get/deprt/"+value,
+                 beforeSend: function( xhr ) {
+                 xhr.overrideMimeType( "application/json; charset=utf-8" );
+                          }
+                        }).done(function( data ) {
+                 $.each(data, function(i, item) {
+                    $("#std_fac_dept").append(new Option(item.short_name, item.id));
+                     });
+                });
+         });
+    });
+   
+     
+</script>
 @endsection

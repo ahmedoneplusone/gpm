@@ -10,6 +10,7 @@ use App\Faculty;
 use App\Departments;
 use App\Student;
 use App\Professor;
+use App\DoctorRegistration;
 class ProfileController extends Controller
 {
       public function __construct()
@@ -22,25 +23,32 @@ class ProfileController extends Controller
           $user_id = auth()->user()->id;
           $user = User::find($user_id);
 
-          if($user->type == 'A'){
+          if($user->type == 'a'){
              return view('admin.profile');
           }
 
-          elseif ($user->type == 'S') {
-             return view('student.profile');
+          elseif ($user->type == 's') {
+             return view('students.profile');
           }
 
-          elseif ($user->type == 'P') {
-             return view('professor.profile');
+          elseif ($user->type == 'p') {
+          	$prof = Professor::where('user_id' , auth()->user()->id)->first();
+          	$Registration = DoctorRegistration::where('prof_id',$prof->id)->first();
+             return view('doctors.profile')->with('registerationTime',$Registration);
           }
 
-          elseif ($user->type == 'F') {
+          elseif ($user->type == 'f') {
               $faculty = Faculty::where('user_id',$user->id)->first();
               $departments = Departments::where('fac_id',$faculty->id)->get();
               $students = Student::where('faculty_id',$faculty->id)->get();
               $professors = Professor::where('faculty_id',$faculty->id)->get();
               return view('faculty.profile')->with(['faculty'=>$faculty,'departments'=>$departments,'students'=>$students,'professors'=>$professors]);
           }
+          else if($user->type == "c")
+          {
+          	return view('company.profile');
+          }
+
         }
 	  }
 
@@ -62,7 +70,6 @@ class ProfileController extends Controller
 	  	 	$User->phone = $request->phone;
 	  	 	$User->password = Hash::make($request->new_password);
 	  	 	$User->save();
-	  	 	
 	  	 	return redirect('/profile')->with('success','Updated Successfully');
 	  	 }
 	  	 else

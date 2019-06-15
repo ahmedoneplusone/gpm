@@ -412,6 +412,7 @@ class ComposerStaticInit6ca854fc9d80742ce205102c2a0d959f
         'App\\Student' => __DIR__ . '/../..' . '/app/Student.php',
         'App\\Team' => __DIR__ . '/../..' . '/app/Team.php',
         'App\\TeamRequestDoctor' => __DIR__ . '/../..' . '/app/TeamRequestDoctor.php',
+        'App\\Tools' => __DIR__ . '/../..' . '/app/Tools.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'BeyondCode\\DumpServer\\DumpServerCommand' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerCommand.php',
         'BeyondCode\\DumpServer\\DumpServerServiceProvider' => __DIR__ . '/..' . '/beyondcode/laravel-dump-server/src/DumpServerServiceProvider.php',
