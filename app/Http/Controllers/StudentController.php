@@ -9,6 +9,7 @@ use App\Team;
 use App\User;
 use App\Professor;
 use App\TeamRequestDoctor;
+use App\Tools;
 
 use Illuminate\Support\Facades\Crypt;
 
@@ -171,16 +172,21 @@ class StudentController extends Controller
                     $query->where('end_date', '>=', date("Y-m-d"));
 
             })->get();
+        $tools = Tools::get();
     	return view('students.register_gp_Project')->with([
-    	    'doctors'=>$prof
+    	    'doctors'=>$prof,
+            'tools'=>$tools
         ]);
     }
 
     public function register_gp_Project_post(Request $request){
 
     	$this->validate($request, [
-            'title' => 'required',
+            'title' => 'required|max:191',
             'body' => 'required',
+            'tools'=>'required',
+            'documentaion'=>'mime:pdf',
+            'Code'=>'mime:zip',
             'prof' => 'required',
             'prof2' => 'required',
             'prof3' => 'required',
@@ -189,9 +195,82 @@ class StudentController extends Controller
 
     	$project = new Project;
 
-    	$project->title = $request->input('title');
-    	$project->body = $request->input('body');
-    	$project->user_id = auth()->user()->id;
+        $project->title = $request->input('title');
+        $project->body =  strip_tags($request->input('body'));
+        $toolsString='';
+
+        if($request->tools)
+        {
+            foreach($request->tools as $tool)
+            {
+                $toolsString =  $toolsString.",".$tool;
+                $Plus1Tool = Tools::where('name',strtolower($tool))->first();
+                $Plus1Tool->points += 1 ;
+                $Plus1Tool->save();
+            }
+            $project->tools = $toolsString;
+        }else if ($request->new_tools)
+        {
+            if($request->new_tools){
+
+                $new_arr =explode (",", $request->new_tools);
+                if($new_arr >=1)
+                {
+                    foreach($new_arr as $tool)
+                    {
+                        $newStringTool = strtolower($tool);
+                        if(Tools::where('name',$newStringTool)->first())
+                        {
+                            $foundTool = Tools::where('name',$newStringTool)->first();
+                            $foundTool += 1;
+                            $foundTool->save();
+                        }
+                        else{
+                            $newTool = new Tools();
+                            $newTool->name = strtolower($newStringTool);
+                            $newTool->points = 1;
+                            $newTool->save();
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            return redirect('/project/create')->with('error','Please Select Tools');
+        }
+        $project->user_id = auth()->user()->id;
+        if($request->documentaion)
+        {
+            $file = $request->documentaion;
+            $file_name = auth()->user()->id . time() . $file->getClientOriginalName();
+
+            $file_path = '/documents';
+
+            $file->move($file_path, $file_name);
+
+            $project->documentaion = $file_name ;
+        }
+        else
+        {
+            $project->documentaion = 'No Document Found';
+        }
+
+        if($request->Code)
+        {
+            $file = $request->Code;
+            $file_name = auth()->user()->id . time() . $file->getClientOriginalName();
+
+            $file_path = '/documents';
+
+            $file->move($file_path, $file_name);
+
+            $project->ZipCodeFile = $file_name ;
+        }
+        else
+        {
+            $project->ZipCodeFile = 'No Document Found';
+        }
         $project->is_gp = 1;
         $project->save();
 

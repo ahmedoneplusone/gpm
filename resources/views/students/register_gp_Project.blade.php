@@ -25,47 +25,66 @@
           </ul>
       </div>
   @endif
-     {!! Form::open(['action' => 'StudentController@register_gp_Project_post', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
 
 
 
-        <div class="row  form-group">
-            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                            <div class="col-md-8 col-md-offset-2">
+  <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+      {!! Form::open(['action' => 'StudentController@register_gp_Project_post', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+      <div class="form-group">
 
-            {{Form::label('title', 'Title')}}
-            {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'Title'])}}
+          <label>Title</label>
+          <input type="text" name="title" class="search_iput" style="display: block;width: 100%" required maxlength="191">
+      </div>
+      <div class="form-group">
+          {{Form::label('body', 'Body')}}
+          {{Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body Text'])}}
+      </div>
 
-        <div class="col-md-6">
 
-                    @if ($errors->has('title'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('title') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-            </div>
-        </div>
 
-        <div class="row form-group">
-            <div class="form-group{{ $errors->has('body') ? ' has-error' : '' }}">
-                            <div class="col-md-8 col-md-offset-2">
 
-            {{Form::label('body', 'Body')}}
-            {{Form::textarea('body', '', ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body Text'])}}
-        <div class="col-md-6">
+  </div>
+  <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+      <div class="form-group">
 
-                    @if ($errors->has('body'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('body') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-         </div>
+          <label>Tools "Multiple Choose"</label>
+          <select class="search_iput" name="tools[]" multiple style="width:100%;display: block ">
+              @foreach($tools as $tool)
+                  <option value="{{$tool->name}}">{{$tool->name}}</option>
+              @endforeach
+          </select>
+      </div>
+      <br>
+      <div class="form-group">
+          <small style="display: block;color:#e74c3c;"><b>If your tools not found mention new tools here seprated by comma "," And No Spaces</b></small>
+          <label>New Tools</label>
 
-        </div>
+          <input type="text" name="new_tools" class="search_iput" style="display: block; width: 100%" placeholder="HTML,CSS,JAVASCRIPT">
+
+      </div>
+      <br>
+      <div class="form-group">
+          <small style="display: block;color:#e74c3c;"><b>If this old or you made a documentaion please save it as PDF and upload it</b></small>
+
+          <label>Documentaion</label>
+
+          <input type="file" name="documentaion" class="search_iput" style="display: block; width: 100%">
+
+      </div>
+      <br>
+
+      <div class="form-group">
+          <small style="display: block;color:#e74c3c;"><b>If this old or you made a Code  please save it as ZIP and upload it</b></small>
+
+
+          <label>Code ZIP Document</label>
+          <input type="file" name="Code" class="search_iput" style="display: block; width: 100%">
+
+      </div>
+
+
+
+  </div>
         
 
                             <div class="row form-group">
