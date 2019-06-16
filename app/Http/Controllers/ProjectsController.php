@@ -81,13 +81,14 @@ class ProjectsController extends Controller
         {
             foreach($request->tools as $tool)
             {
-                $toolsString =  $toolsString.",".$tool;
+                $toolsString .= $tool.",";
                 $Plus1Tool = Tools::where('name',strtolower($tool))->first();
                 $Plus1Tool->points += 1 ;
                 $Plus1Tool->save();
             }
             $project->tools = $toolsString;
-        }else if ($request->new_tools)
+        }
+        else 
         {
             if($request->new_tools){
 
@@ -113,10 +114,7 @@ class ProjectsController extends Controller
                 }
             }
         }
-        else
-        {
-            return redirect('/project/create')->with('error','Please Select Tools');
-        }
+
         $project->user_id = auth()->user()->id;
         if($request->documentaion)
         {

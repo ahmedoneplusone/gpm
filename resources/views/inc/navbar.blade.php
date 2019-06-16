@@ -49,10 +49,7 @@
                         <li><a href="/student/register_gp_SLeader"> <i class="fas fa-plus"></i><b> Rejester Your Team</b></a></li>
                 @endif
                     @endif
-                    @if(Auth::user()->type == 'p')
-                        <li><a href="/prof/open_registraion_date"> <i class="fas fa-plus"></i><b> Open Registraion Date</b></a></li>
-                        <li><a href="/prof/student_requests"> <i class="glyphicon glyphicon-eye-open"></i><b> Student Requests</b></a></li>
-                    @endif
+                   
 
                 @endif
                 

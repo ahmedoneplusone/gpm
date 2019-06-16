@@ -3,7 +3,7 @@
 @section('content')
     <div class="_sec_navbar">
     	<div class="_navbar_input_search">
-    		<form method="POST" >
+    		<form action="{{url('/')}}/search"  method="GET" >
     			@csrf
     			<input type="text" name="q" class="search_iput">
     			<button type="submit" class="_search_submit"><i class="fa fa-search"></i></button>
@@ -17,13 +17,13 @@
     			<div class="_con_card" style="height: 250px;">
     				<h1 class="h1_optimzed"> <i class="fas fa-bell"></i> <b>RECENT FACULTIES</b></h1>
     				<div class="Content-Li">
-    					@if(count($companies) >= 1)
+    					@if(count($fcus) >= 1)
     							@foreach($fcus as $fcu)
     							<ul>
 		    						<li>
 		    							<span><b>{{substr($fcu->user->name,0,25)}}@if(strlen($fcu->user->name) > 25) .. @endif</b></span>
 		    							<p style="line-height: .5;"> <small><strong>
-                                            2 min ago
+                                           {{$fcu->created_at}}
                                         </strong></small></p>
 		    						</li>
 	    						</ul>
@@ -46,7 +46,7 @@
 		    						<li>
 		    							
 		    							<span><b>{{substr($company->user->name,0,25)}}@if(strlen($company->user->name) > 25) .. @endif</b></span>
-		    							<p style="line-height: .5;"> <small><strong>2 min ago</strong></small></p>
+		    							<p style="line-height: .5;"> <small><strong>{{$company->created_at}}</strong></small></p>
 		    						</li>
 	    						</ul>
 	    						@endforeach
@@ -68,10 +68,22 @@
 
 	    							<li>
 	    								<div class="Projects">
+                                            <div class="pro_title">
+                                                <h3><b>{{$project->title}}</b></h3>
+                                            </div>
+                                            <div class="pro_body">
+                                                <p>{{$project->body}}</p>
+                                            </div>
+                                            <div class="pro_tools">
+                                                <?php $tools = explode(',', $project->tools)
+                                                ?>
 
+                                                @foreach($tools as $tool)
+                                                    <button class="btn">{{$tool}}</button>
+                                                @endforeach
+                                            </div>
 		    							</div>
 	    							</li>
-
 	    					@endforeach
     					</ul>
     				@else

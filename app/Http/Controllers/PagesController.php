@@ -8,32 +8,12 @@ use App\Company;
 use App\Project;
 use App\Faculty;
 use App\Departments;
+use Elasticsearch\ClientBuilder;
 
 class PagesController extends Controller
 {
     public function index(){
         $title = 'Welcome To GPM!';
-
-        // if(auth()->check()){
-        //   $user_id = auth()->user()->id;
-        //   $user = User::find($user_id);
-
-        //   if($user->type == 'a'){
-        //      session()->put('type','a');
-        //   }
-
-        //   elseif ($user->type == 's') {
-        //      session()->put('type','s');
-        //   }
-
-        //   elseif ($user->type == 'p') {
-        //      session()->put('type','p');
-        //   }
-
-        //   elseif ($user->type == 'c') {
-        //      session()->put('type','c');
-        //   }
-        // }
 
         $comps = Company::get();
         $projs = Project::get();
@@ -56,4 +36,19 @@ class PagesController extends Controller
         $depts = Departments::where('fac_id',$id)->get();
         return $depts;
     }
+
+    public function search (Request $request)
+    {
+        $q = $request->q;
+        $all = Project::get();
+        $selected = [];
+        foreach($all as $project)
+        {
+            similar_text($q,$project->body,$perc);
+            array_push($selected,$perc,$project->id);
+        }
+
+        dd($selected);
+    }
 }
+
